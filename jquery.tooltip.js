@@ -2,7 +2,7 @@
 * @file jQuery plugin that creates the basic interactivity for an ARIA tooltip widget
 * @desc this plugin is in early experimental status
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.0.2
+* @version 0.0.3
 * @requires jquery
 * @requires jquery-stick
 * @requires jquery-focusable
@@ -21,6 +21,7 @@
     * @param {number} [options.offsetTop]
     * @param {number} [options.offsetLeft]
     * @param {boolean} [options.isFixedPosition]
+    * @param {number} [options.closeTransitionDurationMs]
     * @return {jQuery} chainable jQuery class
     */
     $.fn.tooltip = function(options) {
@@ -31,7 +32,8 @@
             alignY: 'bottom',
             offsetTop: 0,
             offsetLeft: 0,
-            isFixedPosition: false
+            isFixedPosition: false,
+            closeTransitionDurationMs: 250
         }, options);
 
         return this.each(function onEach() {
@@ -39,6 +41,8 @@
             var $focusable = $tooltipWidget.focusable().first();
             var $overlay = $('#' + $focusable.attr('aria-describedby'));
             var $window = $(window);
+            var showTimeout;
+            var hideTimeout;
 
             /**
             * Stick fixed position tooltip overlay to focusable element
@@ -57,31 +61,39 @@
             */
             function show() {
                 if ($overlay.attr('aria-hidden') !== 'false') {
+                    // prevent hide timer from kicking in
+                    window.clearTimeout(hideTimeout);
+
                     // update position of overlay
                     stick();
 
-                    // aria-hidden triggers CSS display
-                    $overlay.attr('aria-hidden', 'false');
+                    // set display block so that CSS transitions can trigger
+                    $overlay.css('display', 'block');
 
-                    if (options.hideOnScroll === true) {
-                        $window.one('scroll', hide);
-                    }
+                    showTimeout = setTimeout(function(e) {
+                        // aria-hidden triggers CSS animations
+                        $overlay.attr('aria-hidden', 'false');
 
-                    if (options.hideOnResize === true) {
-                        $window.one('resize', hide);
-                    }
-
-                    // overlays with fixed position might need to be repositioned onscroll & onresize
-                    if (options.isFixedPosition === true) {
-                        if (options.hideOnScroll === false) {
-                            $window.on('scroll', stick);
+                        if (options.hideOnScroll === true) {
+                            $window.one('scroll', hide);
                         }
-                        if (options.hideOnResize === false) {
-                            $window.on('resize', stick);
-                        }
-                    }
 
-                    $tooltipWidget.trigger('tooltipShow');
+                        if (options.hideOnResize === true) {
+                            $window.one('resize', hide);
+                        }
+
+                        // overlays with fixed position might need to be repositioned onscroll & onresize
+                        if (options.isFixedPosition === true) {
+                            if (options.hideOnScroll === false) {
+                                $window.on('scroll', stick);
+                            }
+                            if (options.hideOnResize === false) {
+                                $window.on('resize', stick);
+                            }
+                        }
+
+                        $tooltipWidget.trigger('tooltipShow');
+                    }, 10);
                 }
             }
 
@@ -93,10 +105,19 @@
             */
             function hide() {
                 if ($overlay.attr('aria-hidden') === 'false') {
+                    // prevent show timer from kicking in (unlikely)
+                    window.clearTimeout(showTimeout);
                     $window.off('scroll resize', stick);
                     $window.off('scroll resize', hide);
+
+                    // trigger css animations
                     $overlay.attr('aria-hidden', 'true');
-                    $tooltipWidget.trigger('tooltipHide');
+
+                    hideTimeout = setTimeout(function(e) {
+                        // after css animations are done set display to none
+                        $overlay.css('display', 'none');
+                        $tooltipWidget.trigger('tooltipHide');
+                    }, options.closeTransitionDurationMs);
                 }
             }
 

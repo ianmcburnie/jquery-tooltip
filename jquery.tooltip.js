@@ -2,7 +2,7 @@
 * @file jQuery plugin that creates the basic interactivity for an ARIA tooltip widget
 * @desc this plugin is in early experimental status
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.0.1
+* @version 0.0.2
 * @requires jquery
 * @requires jquery-stick
 * @requires jquery-focusable
@@ -20,16 +20,18 @@
     * @param {number} [options.alignX]
     * @param {number} [options.offsetTop]
     * @param {number} [options.offsetLeft]
+    * @param {boolean} [options.isFixedPosition]
     * @return {jQuery} chainable jQuery class
     */
     $.fn.tooltip = function(options) {
         options = $.extend({
-            hideOnScroll: true,
-            hideOnResize: true,
-            alignX: 'baseline',
+            hideOnScroll: false,
+            hideOnResize: false,
+            alignX: 'start',
             alignY: 'bottom',
             offsetTop: 0,
-            offsetLeft: 0
+            offsetLeft: 0,
+            isFixedPosition: false
         }, options);
 
         return this.each(function onEach() {
@@ -63,16 +65,20 @@
 
                     if (options.hideOnScroll === true) {
                         $window.one('scroll', hide);
-                    } else {
-                        // todo: throttle scroll event
-                        $window.on('scroll', stick);
                     }
 
                     if (options.hideOnResize === true) {
                         $window.one('resize', hide);
-                    } else {
-                        // todo: throttle resize event
-                        $window.on('resize', stick);
+                    }
+
+                    // overlays with fixed position might need to be repositioned onscroll & onresize
+                    if (options.isFixedPosition === true) {
+                        if (options.hideOnScroll === false) {
+                            $window.on('scroll', stick);
+                        }
+                        if (options.hideOnResize === false) {
+                            $window.on('resize', stick);
+                        }
                     }
 
                     $tooltipWidget.trigger('tooltipShow');

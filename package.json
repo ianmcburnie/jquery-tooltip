@@ -41,14 +41,14 @@
     "jsmin": "^1.0.1",
     "pre-commit": "^1.1.2",
     "rimraf": "^2.4.4",
-    "jquery-stick": "~0.0.1",
+    "jquery-stick": "~0.0.2",
     "jquery-focusable": "~0.2.3",
     "jquery-focus-exit": "~0.1.3",
     "jquery-mouse-exit": "~0.1.1"
   },
   "peerDependencies": {
     "jquery": ">=1.11 < 3",
-    "jquery-stick": "~0.0.1",
+    "jquery-stick": "~0.0.2",
     "jquery-focusable": "~0.2.3",
     "jquery-focus-exit": "~0.1.3",
     "jquery-mouse-exit": "~0.1.1"

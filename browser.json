@@ -1,0 +1,10 @@
+{
+    "dependencies":[
+        {"require-run": "jquery"},
+        "jquery-focusable",
+        "jquery-stick",
+        "jquery-focus-exit",
+        "jquery-mouse-exit",
+        "jquery.tooltip.js"
+    ]
+}

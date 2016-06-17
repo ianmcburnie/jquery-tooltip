@@ -2,7 +2,7 @@
 * @file jQuery plugin that creates the basic interactivity for an ARIA tooltip widget
 * @desc this plugin is in early experimental status
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.0.3
+* @version 0.1.0
 * @requires jquery
 * @requires jquery-stick
 * @requires jquery-focusable

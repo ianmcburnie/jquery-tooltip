@@ -4,10 +4,9 @@
   "version": "0.1.0",
   "scripts": {
     "prepublish": "npm run clean && npm run lint && npm run build",
-    "build": "npm run lasso && npm run minify",
+    "build": "npm run minify",
     "clean": "rimraf *.min.js lint.txt",
     "fix": "eslint jquery.tooltip.js --fix",
-    "lasso": "lasso browser.json --output-dir ./ --minify",
     "lint": "eslint jquery.tooltip.js > lint.txt",
     "minify": "jsmin -o jquery.tooltip.min.js jquery.tooltip.js"
   },
@@ -31,11 +30,11 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^2.12.0",
-    "eslint-config-google": "^0.4.0",
+    "eslint": "^3.0.0",
+    "eslint-config-google": "^0.6.0",
     "jquery": ">=1.11",
     "jquery-focusable": "~0.3.0",
-    "jquery-focus-exit": "~0.2.0",
+    "jquery-focus-exit": "~0.3.0",
     "jquery-migrate": "^1.4.1",
     "jquery-mouse-exit": "~0.2.0",
     "jquery-stick": "~0.1.0",
@@ -46,7 +45,7 @@
   "peerDependencies": {
     "jquery": ">=1.11",
     "jquery-focusable": "~0.3.0",
-    "jquery-focus-exit": "~0.2.0",
+    "jquery-focus-exit": "~0.3.0",
     "jquery-mouse-exit": "~0.2.0",
     "jquery-stick": "~0.1.0"
   },

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Demo: jquery-tooltip</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <style>
+            .tooltip {
+                position: relative;
+            }
+            .tooltip [role=tooltip] {
+                background-color: LightYellow;
+                border: 1px solid #eee;
+                bottom: 100%;
+                display: none;
+                left: 0;
+                padding: 0.25em 0.5em;
+                position: absolute;
+                white-space: nowrap;
+                z-index: 1;
+            }
+            .tooltip--expanded [role=tooltip] {
+                display: block;
+            }
+            .toolbar {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+            .toolbar li {
+                display: inline;
+            }
+            #bold button {
+                font-weight: bold;
+            }
+            #italic button {
+                font-style: italic;
+            }
+            #underline button {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>jquery-tooltip</h1>
+        <h2>Examples</h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <h3>Toolbar Buttons</h3>
+                <ul class="toolbar">
+                    <li class="tooltip" id="bold">
+                        <button class="tooltip__trigger" accesskey="b" type="button" aria-describedby="tooltip-bold">B</button>
+                        <span class="tooltip__overlay" id="tooltip-bold" role="tooltip">Access Key: B</span>
+                    </li>
+                    <li class="tooltip" id="italic">
+                        <button class="tooltip__trigger" accesskey="i" type="button" aria-describedby="tooltip-italic">I</button>
+                        <span class="tooltip__overlay" id="tooltip-italic" role="tooltip">Access Key: I</span>
+                    </li>
+                    <li class="tooltip" id="underline">
+                        <button class="tooltip__trigger" accesskey="u" type="button" aria-describedby="tooltip-underline">U</button>
+                        <span class="tooltip__overlay" id="tooltip-underline" role="tooltip">Access Key: U</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script src="browser.js"></script>
+        <script>
+            $('.tooltip').tooltip();
+            $('.toolbar').on('click', 'button', function(e) {
+                alert('You pressed ' + $(this).text());
+            });
+        </script>
+    </body>
+</html>

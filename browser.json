@@ -1,10 +1,8 @@
 {
     "dependencies":[
         {"require-run": "jquery"},
-        "jquery-focusable",
-        "jquery-stick",
-        "jquery-focus-exit",
-        "jquery-mouse-exit",
+        "jquery-hover-flyout",
+        "jquery-focus-flyout",
         "jquery.tooltip.js"
     ]
 }

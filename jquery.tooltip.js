@@ -2,7 +2,7 @@
 * @file jQuery plugin that creates the basic interactivity for an ARIA tooltip widget
 * @desc this plugin is in early experimental status
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.2.0
+* @version 0.2.1
 * @requires jquery
 * @requires jquery-hover-flyout
 * @requires jquery-focus-flyout
@@ -13,8 +13,10 @@
     *
     * @method "jQuery.fn.tooltip"
     * @param {Object} [options]
-    * @param {string} [options.triggerSelector] - selector for trigger element (default: '.tooltip__trigger, [role=tooltip]')
-    * @param {string} [options.overlaySelector] - selector for overlay element (default: '.tooltip__overlay, [aria-describedby]')
+    * @param {string} [options.triggerSelector] - selector for trigger element
+    * (default: '.tooltip__trigger, [role=tooltip]')
+    * @param {string} [options.overlaySelector] - selector for overlay element
+    * (default: '.tooltip__overlay, [aria-describedby]')
     * @fires {object} flyoutExpand - the tooltip flyout has expanded
     * @fires {object} flyoutCollapse - the tooltip flyout has collapsed
     * @return {jQuery} chainable jQuery class
@@ -27,7 +29,7 @@
 
         return this.each(function onEach() {
             var $widget = $(this);
-            var $trigger = $widget.find(options.triggerSelector);
+
             var flyoutOptions = {
                 expandedClass: 'tooltip--expanded',
                 triggerSelector: options.triggerSelector,

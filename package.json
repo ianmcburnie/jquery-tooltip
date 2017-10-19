@@ -16,10 +16,6 @@
   },
   "pre-commit": "prepublish",
   "author": "Ian McBurnie <ianmcburnie@hotmail.com>",
-  "homepage": "https://github.com/ianmcburnie/jquery-tooltip",
-  "bugs": {
-    "url": "https://github.com/ianmcburnie/jquery-tooltip/issues"
-  },
   "keywords": [
     "jquery-plugin",
     "ecosystem:jquery",
@@ -30,21 +26,23 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ianmcburnie/jquery-tooltip.git"
+    "url": "https://github.com/makeup-jquery/jquery-tooltip.git"
   },
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2",
-    "eslint": "^3",
-    "eslint-config-google": "~0.7",
+    "eslint": "^4",
+    "eslint-config-ebay": "~0.1",
     "jquery": ">=1.11",
+    "jquery-focus-exit": "^1",
     "jquery-focus-flyout": "~0.0",
     "jquery-hover-flyout": "~0.0",
-    "jquery-migrate": "^3",
+    "jquery-mouse-exit": "^1",
+    "jquery-next-id": "^1",
     "jsmin": "^1",
     "lasso-cli": "^2",
     "onchange": "^3",
-    "parallelshell": "^2",
+    "parallelshell": "^3",
     "pre-commit": "^1",
     "rimraf": "^2"
   },
